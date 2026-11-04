@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Bold Type — Episodios</title>
+<style>
+:root{--bg:#101116;--panel:#1a1b24;--muted:#aaa9b4;--pink:#f078a7;--cream:#fff7f3;--line:#ffffff18}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% -10%,#58344a 0,transparent 38%),var(--bg);color:var(--cream);font:16px/1.5 Inter,system-ui,Segoe UI,sans-serif}.wrap{max-width:1180px;margin:auto;padding:26px 24px 70px}.top{display:flex;justify-content:space-between;align-items:center;color:#e6dbe1;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase}.brand{font-weight:800}.badge{border:1px solid #ffffff30;border-radius:99px;padding:7px 13px;color:#ddd}.hero{min-height:350px;display:flex;align-items:end;padding:48px 0 38px}.hero-inner{max-width:720px}.eyebrow{color:#ff9ec1;text-transform:uppercase;letter-spacing:.2em;font-size:.76rem;font-weight:800}.hero h1{font-family:Georgia,serif;font-size:clamp(3.5rem,9vw,7rem);letter-spacing:-.06em;line-height:.92;margin:14px 0 20px}.hero p{color:#d0c7ce;max-width:620px;font-size:1.06rem}.meta{color:#d6b6c4;font-size:.88rem}.tools{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 30px}.button,select{background:#22232d;color:#fff;border:1px solid #ffffff24;border-radius:9px;padding:11px 15px;font:inherit}select{cursor:pointer}.section-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:24px 0 14px}.section-head h2{font:2rem Georgia,serif;margin:0}.hint{color:var(--muted);font-size:.88rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}.card{background:linear-gradient(145deg,#20212b,#171820);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .18s}.card:hover,.card:focus{transform:translateY(-3px);border-color:#f078a7;outline:none}.thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#33202d,#161720);display:grid;place-items:center;color:#bbb}.thumb strong{font:3rem Georgia,serif;color:#f078a7}.viewer{display:none;margin:0 0 28px;padding:14px;background:#171820;border:1px solid var(--line);border-radius:14px}.viewer.active{display:block}.viewer-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.viewer-title{font:1.35rem Georgia,serif}.close{background:transparent;border:1px solid #ffffff30;color:#fff;border-radius:8px;padding:8px 12px;cursor:pointer}.video-frame{aspect-ratio:16/9;background:#08090d;border-radius:9px;overflow:hidden}.video-frame iframe{width:100%;height:100%;border:0}.player{display:none}.placeholder{padding:20px;text-align:center;color:#bbb}.placeholder strong{display:block;font-size:2rem;color:#f078a7;font-family:Georgia,serif}.details{padding:15px 16px 17px}.ep-num{color:#f078a7;text-transform:uppercase;font-weight:800;font-size:.72rem;letter-spacing:.12em}.details h3{margin:4px 0 0;font:1.35rem Georgia,serif}.note{margin-top:26px;padding:14px 16px;border:1px solid #ffffff18;border-radius:10px;color:#bdb9c2;font-size:.85rem}footer{margin-top:44px;border-top:1px solid var(--line);padding-top:18px;color:#8e8b95;font-size:.8rem}@media(max-width:600px){.wrap{padding:18px 15px 50px}.hero{min-height:300px}.section-head{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><span class="brand">La sala privada</span><span class="badge">Tu espacio de chill</span></header>
+<section class="hero"><div class="hero-inner"><div class="eyebrow">Una serie para maratonear</div><h1>The Bold Type</h1><p>Tres amigas, sus carreras y todo lo que ocurre cuando intentan abrirse camino en Nueva York. Elige un capítulo y dale al play.</p><div class="meta">Drama · Amistad · Nueva York</div></div></section>
+<div class="tools"><label for="season" class="hint" style="align-self:center">Temporada</label><select id="season" aria-label="Elegir temporada"></select></div>
+<div class="section-head"><div><div class="eyebrow">The Bold Type</div><h2 id="season-title">Temporada 1</h2></div><div class="hint">Selecciona un capítulo para reproducirlo.</div></div>
+<section id="viewer" class="viewer" aria-live="polite"><div class="viewer-top"><div><div class="eyebrow" id="viewer-episode"></div><div class="viewer-title" id="viewer-title"></div></div><button class="close" id="close-player" type="button">Cerrar reproductor</button></div><div class="video-frame" id="video-frame"></div></section><div id="grid" class="grid"></div>
+
+</div>
+<script>
+// EDITA SOLO ESTE BLOQUE: cambia los títulos y pega el enlace compartido o iframe de cada vídeo.
+// Mantén el número de elementos de cada temporada para conservar la numeración solicitada.
+const series = {
+  1: [
+    { title: 'Capítulo 1', embed: 'https://www.dropbox.com/scl/fi/su76alo25p4puvz12p8oe/The-Bold-Type-1x1.mp4?rlkey=eagn85434viv7kcqqp3kyxduk&st=6r88gmds&dl=0' }, { title: 'Capítulo 2', embed: 'https://www.dropbox.com/scl/fi/anoohmplsojx5jd353luw/The-Bold-Type-1x2.mp4?rlkey=naw0wy92fg31g7rsf1f3fyjf3&st=6keqaoya&dl=0' },
+    { title: 'Capítulo 3', embed: 'https://www.dropbox.com/scl/fi/0ltwe53w2r6eecle90yqf/The-Bold-Type-1x3.mp4?rlkey=h2c4y259lb5qcex3wn59rsppu&st=zicqrsfx&dl=0' }, { title: 'Capítulo 4', embed: 'https://www.dropbox.com/scl/fi/sz2hyhzc787mxmytr3ws3/The-Bold-Type-1x4.mp4?rlkey=j5n36ii1r9861ip46mjjr2eqg&st=2176y0qy&dl=0' },
+    { title: 'Capítulo 5', embed: 'https://www.dropbox.com/scl/fi/04vle4ycc7rpn74jy4ha5/The-Bold-Type-1x5.mp4?rlkey=vpgylsmhhaa195koby311unux&st=4kj781n0&dl=0' }, { title: 'Capítulo 6', embed: 'https://www.dropbox.com/scl/fi/jqei2gauhp66wkrid2tjq/The-Bold-Type-1x6.mp4?rlkey=ql6enwbb0obg9jfsrs1g1bob3&st=oxaa2ud7&dl=0' },
+    { title: 'Capítulo 7', embed: 'https://www.dropbox.com/scl/fi/qdjyi1rf9emgfwg00lgo8/The-Bold-Type-1x7.mp4?rlkey=ze6lzve3z8s0n4jo5y8q1fqn3&st=jjxqcm5x&dl=0' }, { title: 'Capítulo 8', embed: 'https://www.dropbox.com/scl/fi/lwak7sksxhsfwggyk5uam/The-Bold-Type-1x8.mp4?rlkey=qbh8ntbiagp2fk5cfb0hcx7d0&st=141jyp8b&dl=0' },
+    { title: 'Capítulo 9', embed: 'https://www.dropbox.com/scl/fi/szqgji68z40ymtwmdpq4k/The-Bold-Type-1x9.mp4?rlkey=ftl9toh4yus3uodm85ligkh1p&st=boarkdiw&dl=0' }, { title: 'Capítulo 10', embed: 'https://www.dropbox.com/scl/fi/9wubywctp6cx7hto0150t/The-Bold-Type-1x10.mp4?rlkey=7mc4lab61spxb89wku7b8kubx&st=v54l2w57&dl=0' }
+  ],
+  2: [
+    { title: 'Capítulo 1', embed: 'https://www.dropbox.com/scl/fi/1kvzw4a20pr9wppasxpff/The-Bold-Type-2x1.mp4?rlkey=o38mzgai0iua9s9iusajkehnj&st=bslkzrld&dl=0' }, { title: 'Capítulo 2', embed: 'https://www.dropbox.com/scl/fi/gxuavi3rbsgu3z7ocjias/The-Bold-Type-2x2.mp4?rlkey=ha6it85i24bfqnxe7xexr15i8&st=6l0zyt2v&dl=0' },
+    { title: 'Capítulo 3', embed: 'https://www.dropbox.com/scl/fi/xjzxm64w4bduoi9v75uun/The-Bold-Type-2x3.mp4?rlkey=vdsmb8n31tyu7br66b04tby5b&st=u5tqdsjr&dl=0' }, { title: 'Capítulo 4', embed: 'https://www.dropbox.com/scl/fi/8xe6voiswfkc1wuaqqxh7/The-Bold-Type-2x4.mp4?rlkey=3siuh6971zz0e4wurp9vsb9nc&st=f8225oy6&dl=0' },
+    { title: 'Capítulo 5', embed: 'https://www.dropbox.com/scl/fi/a5z0ktd8jgb7g777wxl00/The-Bold-Type-2x5.mp4?rlkey=lwd8ba6qwsawritned2em3n0h&st=uodw14w0&dl=0' }, { title: 'Capítulo 6', embed: 'https://www.dropbox.com/scl/fi/dlmmvftx6ixubcucee0hw/The-Bold-Type-2x6.mp4?rlkey=jhinm95wz8v472lko1h2m8s4q&st=sc3l2auy&dl=0' },
+    { title: 'Capítulo 7', embed: 'https://www.dropbox.com/scl/fi/kstl8cy2h5xud5onur4cr/The-Bold-Type-2x7.mp4?rlkey=ummufo44g4zwj81relbu69rpu&st=7v959oen&dl=0' }, { title: 'Capítulo 8', embed: 'https://www.dropbox.com/scl/fi/6jp2viyaqtgf2dxadau76/The-Bold-Type-2x8.mp4?rlkey=4siwj2f9r0w8k5iga0qyqg0c1&st=4dowg5yp&dl=0' },
+    { title: 'Capítulo 9', embed: 'https://www.dropbox.com/scl/fi/zox5vt7gl7ezckynmt14u/The-Bold-Type-2x9.mp4?rlkey=dfa4csnzomnikd779fz4xkx90&st=75j3ylrd&dl=0' }, { title: 'Capítulo 10', embed: 'https://www.dropbox.com/scl/fi/oofrcq7do1fk4wpbvciob/The-Bold-Type-2x10.mp4?rlkey=g69wsgtrs5b4trcibpxt9wl7x&st=8ymxo7m1&dl=0' }
+  ],
+  3: [
+    { title: 'Capítulo 1', embed: 'https://www.dropbox.com/scl/fi/u41ikjp7pf2ymjl59jiob/The-Bold-Type-3x1.mp4?rlkey=a317r9rx63pchub2uxip2y6b9&st=to4v7p52&dl=0' }, { title: 'Capítulo 2', embed: 'https://www.dropbox.com/scl/fi/g2g9iv219ws8xekin453m/The-Bold-Type-3x2.mp4?rlkey=nrao7agkfxbxn8xaa5km3upik&st=rx7ayzdy&dl=0' },
+    { title: 'Capítulo 3', embed: 'https://www.dropbox.com/scl/fi/3f7fps39umqfw8vyon9zs/The-Bold-Type-3x3.mp4?rlkey=bhno5mq6wafgybmpnj0ftdocj&st=d3a31fo8&dl=0' }, { title: 'Capítulo 4', embed: 'https://www.dropbox.com/scl/fi/ttl00oe4m1schytu7oqxm/The-Bold-Type-3x4.mp4?rlkey=c133hhbi4zh3j73wxuwji2ngl&st=jolxghpk&dl=0' },
+    { title: 'Capítulo 5', embed: 'https://www.dropbox.com/scl/fi/v5npkew3khppghfegnwkq/The-Bold-Type-3x5.mp4?rlkey=1i11lqn6rs2k1haqcrarg4w2b&st=n2iookzj&dl=0' }, { title: 'Capítulo 6', embed: 'https://www.dropbox.com/scl/fi/kuf732zui01y0c81bxa14/The-Bold-Type-3x6.mp4?rlkey=g9mqtib8b10cb72r2kolf1a84&st=91vsj6w3&dl=0' },
+    { title: 'Capítulo 7', embed: 'https://www.dropbox.com/scl/fi/51vjn6ukx45j88h6xdoz8/The-Bold-Type-3x7.mp4?rlkey=3bfc8w4rxcdyquwx23cyh6riq&st=6pkkfzgh&dl=0' }, { title: 'Capítulo 8', embed: 'https://www.dropbox.com/scl/fi/36pmfv4afdoakvbed0fdg/The-Bold-Type-3x8.mp4?rlkey=b8r66eudiifxyfg1qoi7uxzc8&st=55ua5au6&dl=0' },
+    { title: 'Capítulo 9', embed: 'https://www.dropbox.com/scl/fi/881okpio8rlhskigvptwd/The-Bold-Type-3x9.mp4?rlkey=xggbq2qzc2mv51hl5d4crmp1v&st=9xiq6oqa&dl=0' }, { title: 'Capítulo 10', embed: 'https://www.dropbox.com/scl/fi/5r9wx4gcjuiysvztoxnpb/The-Bold-Type-3x10.mp4?rlkey=tyo74gr9e32f11jztcfb2fbh1&st=4zk6hav3&dl=0' }
+  ],
+  4: [
+    { title: 'Capítulo 1', embed: 'https://www.dropbox.com/scl/fi/opoc2j8utsu26wg62au8u/The-Bold-Type-4x1.mp4?rlkey=wb3w2wqwctei4hpggi7xblhd8&st=vfq9m2rm&dl=0' }, { title: 'Capítulo 2', embed: 'https://www.dropbox.com/scl/fi/ep9o9ng5b6mqy48o6m9o2/The-Bold-Type-4x2.mp4?rlkey=n9nzlfn5apx3edy1y3fierftk&st=a6h8qud6&dl=0' },
+    { title: 'Capítulo 3', embed: 'https://www.dropbox.com/scl/fi/7c7c25cwdlrwygrl89f9m/The-Bold-Type-4x3.mp4?rlkey=w5yrlouw64esciqe84cl0vnc9&st=nm3h9rpt&dl=0' }, { title: 'Capítulo 4', embed: 'https://www.dropbox.com/scl/fi/28qkuee5tflukkimkynyc/The-Bold-Type-4x4.mp4?rlkey=9kpaf6vse7wxm6gclq2pftdyo&st=uz8pi7a1&dl=0' },
+    { title: 'Capítulo 5', embed: 'https://www.dropbox.com/scl/fi/qk48urp7l9cpjyz2tjz1e/The-Bold-Type-4x5.mp4?rlkey=p74o417n0jg3ic0ygqv139oxx&st=062ygp2r&dl=0' }, { title: 'Capítulo 6', embed: 'https://www.dropbox.com/scl/fi/h9u610dfgmqls3g47q06p/The-Bold-Type-4x6.mp4?rlkey=3zotpnioat1c2hl2gh3np189m&st=xoyef19j&dl=0' },
+    { title: 'Capítulo 7', embed: 'https://www.dropbox.com/scl/fi/v9xxf7q7s1x0nx79tb08k/The-Bold-Type-4x7.mp4?rlkey=dnsj2ovzgitcuovfsb85qrcaq&st=x5l0r0ls&dl=0' }, { title: 'Capítulo 8', embed: 'https://www.dropbox.com/scl/fi/25w926nihg3iscqe01daj/The-Bold-Type-4x8.mp4?rlkey=7qxtjapva82xt1507r0dbpedb&st=w5cajz8i&dl=0' },
+    { title: 'Capítulo 9', embed: 'https://www.dropbox.com/scl/fi/n0798zp670gj5ial6u2v9/The-Bold-Type-4x9.mp4?rlkey=dlhodz7hvy180viccna9j9pyk&st=1rd0sshn&dl=0' }, { title: 'Capítulo 10', embed: 'https://www.dropbox.com/scl/fi/jnbzdqbf2fbzu37yvywra/The-Bold-Type-4x10.mp4?rlkey=xl6dmll8rwctnsjvpp80z8nz0&st=yklqql32&dl=0' },
+    { title: 'Capítulo 11', embed: 'https://www.dropbox.com/scl/fi/rq5512omwf07a7tk4bnzm/The-Bold-Type-4x11.mp4?rlkey=gnewvm3kulzjs8ftab12zv3ob&st=2f4dd02j&dl=0' }, { title: 'Capítulo 12', embed: 'https://www.dropbox.com/scl/fi/vc8cgr29atg95yzhiudfh/The-Bold-Type-4x12.mp4?rlkey=nxd5icjcb2x6zws6he85wip6k&st=vtmk6r75&dl=0' },
+    { title: 'Capítulo 13', embed: 'https://www.dropbox.com/scl/fi/jr6infnf1xzoi00nuatmh/The-Bold-Type-4x13.mp4?rlkey=k048tkpkfiffgyst1u3rb0gm1&st=hnbhu6fu&dl=0' }, { title: 'Capítulo 14', embed: 'https://www.dropbox.com/scl/fi/6l5ckta043fudeibmk27m/The-Bold-Type-4x14.mp4?rlkey=hlbxfwrn9idm6e3xv6b11dol2&st=4g8y0hgr&dl=0' },
+    { title: 'Capítulo 15', embed: 'https://www.dropbox.com/scl/fi/3h13xi6ueniwmiclnhma3/The-Bold-Type-4x15.mp4?rlkey=y8mtl2vjhy95jhsi2j0h3k980&st=tkvshznm&dl=0' }, { title: 'Capítulo 16', embed: 'https://www.dropbox.com/scl/fi/ew0l71jh6i0x114f5avgo/The-Bold-Type-4x16.mp4?rlkey=y6buh2xvqbjhgynpbh1p262qc&st=nxivwun4&dl=0' }
+  ]
+};
+
+const seasonSelect = document.getElementById('season');
+const grid = document.getElementById('grid');
+function safeEmbed(input) {
+  const value = (input || '').trim();
+  if (!value) return '';
+  const match = value.match(/<iframe\b[^>]*\bsrc=["']([^"']+)["']/i);
+  let source = match ? match[1] : value;
+  try {
+    const url = new URL(source);
+    const host = url.hostname.toLowerCase();
+    if (!['dropbox.com', 'www.dropbox.com', 'dl.dropboxusercontent.com', 'www.dropboxusercontent.com'].includes(host)) return '';
+    if (host === 'dropbox.com' || host === 'www.dropbox.com') {
+      url.searchParams.delete('dl');
+      url.searchParams.set('raw', '1');
+    }
+    return url.href;
+  } catch { return ''; }
+}
+function showPlayer(number, index) {
+  const episode = series[number][index];
+  const src = safeEmbed(episode.embed);
+  const viewer = document.getElementById('viewer');
+  const frame = document.getElementById('video-frame');
+  if (!src) {
+    alert('Este capítulo todavía no tiene enlace de Dropbox. Añádelo en el bloque series del HTML.');
+    return;
+  }
+  const title = episode.title || ('Capítulo ' + (index + 1));
+  document.getElementById('viewer-episode').textContent = 'Temporada ' + number + ' · Capítulo ' + String(index + 1).padStart(2,'0');
+  document.getElementById('viewer-title').textContent = title;
+  const iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.title = title;
+  iframe.allow = 'autoplay; fullscreen';
+  iframe.allowFullscreen = true;
+  frame.replaceChildren(iframe);
+  viewer.classList.add('active');
+  viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function renderSeason(number) {
+  const episodes = series[number] || [];
+  document.getElementById('season-title').textContent = 'Temporada ' + number;
+  document.getElementById('viewer').classList.remove('active');
+  document.getElementById('video-frame').replaceChildren();
+  grid.innerHTML = episodes.map((episode, index) => {
+    const title = episode.title || ('Capítulo ' + (index + 1));
+    return '<article class="card" tabindex="0" role="button" data-episode="' + index + '" aria-label="Reproducir temporada ' + number + ', capítulo ' + (index + 1) + ': ' + title + '"><div class="thumb"><strong>' + String(index + 1).padStart(2,'0') + '</strong></div><div class="details"><div class="ep-num">Temporada ' + number + ' · Capítulo ' + String(index + 1).padStart(2,'0') + '</div><h3>' + title + '</h3></div></article>';
+  }).join('');
+  grid.querySelectorAll('[data-episode]').forEach(card => {
+    const open = () => showPlayer(number, Number(card.dataset.episode));
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); } });
+  });
+}
+document.getElementById('close-player').addEventListener('click', () => {
+  document.getElementById('viewer').classList.remove('active');
+  document.getElementById('video-frame').replaceChildren();
+});seasonSelect.innerHTML = Object.keys(series).map(number => `<option value="${number}">Temporada ${number}</option>`).join('');
+seasonSelect.addEventListener('change', () => renderSeason(seasonSelect.value));
+renderSeason(seasonSelect.value);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
